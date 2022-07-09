@@ -6,14 +6,6 @@ from plotly.subplots import make_subplots
 
 st.set_page_config(page_title='TFT Predicciones', page_icon="⚡", layout='wide', initial_sidebar_state='auto')
 
-css_file = 'style.css'
-
-def local_css(css_file):
-    with open(css_file) as f:
-        st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
-
-local_css(css_file)
-
 st.markdown(
         f""" <style>.reportview-container .main .block-container{{
         max-width: {1450}px;
@@ -49,9 +41,9 @@ st.markdown(
 )
 
 datos = pd.read_excel("precios.xlsx")
-test_metrics = pd.read_excel("Métricas/Test_metrics.xlsx")
-predicciones = pd.read_excel("Métricas/Predicciones.xlsx")
-attention = pd.read_excel("Métricas/Atención.xlsx")
+test_metrics = pd.read_excel("Test_metrics.xlsx")
+predicciones = pd.read_excel("Predicciones.xlsx")
+attention = pd.read_excel("Atención.xlsx")
 
 
 def filtrar_fecha_encoder(df,
@@ -311,7 +303,7 @@ else:
 
     datos = datos[(datos["datetime"].isin(predicciones["datetime"])) & (datos["Hora"]==int(hora_elegida))]
 
-    metricas_horas = pd.read_excel("Métricas/Métricas_por_horas.xlsx")
+    metricas_horas = pd.read_excel("Métricas_por_horas.xlsx")
     metricas_horas = filtrar_fecha_encoder(df=metricas_horas,
                                            encoder=encoder_elegido,
                                            fecha=fecha_elegida,
