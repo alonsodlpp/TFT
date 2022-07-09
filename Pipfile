@@ -8,6 +8,7 @@ plotly = "*"
 streamlit = "*"
 pandas = "*"
 numpy = "*"
+openpyxl ="*"
 
 [dev-packages]
 
