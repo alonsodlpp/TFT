@@ -441,7 +441,7 @@ else:
     def plot_horas_por_dia(df_predicciones, df_test_metrics, df_metricas_horas):
         fig3 = make_subplots(rows=2, cols=1, shared_xaxes=True,
                              vertical_spacing=0.15,
-                             subplot_titles=("Predicción para todos las horas del día " + str(fecha_elegida),
+                             subplot_titles=("Predicción para todas las horas del día " + str(fecha_elegida),
                                              ("MAPE " if metrica_elegica else "MAE ") + "para todas las horas "),
                              x_title="Hora",
                              row_width=[0.25, 0.75])
