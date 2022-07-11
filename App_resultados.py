@@ -470,6 +470,9 @@ else:
 
         fig3.update_xaxes(tickmode="array", tickvals=df_predicciones["Hora"],
                           row=1, col=1)
+        
+        fig3.update_layout(height=650,
+                           margin=dict(t=20))
 
         fig3.add_trace(go.Bar(y=df_test_metrics[("mape" if metrica_elegica else "mae")],
                               name=("MAPE" if metrica_elegica else "MAE"),
