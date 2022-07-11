@@ -42,7 +42,7 @@ st.markdown(
 
 datos = pd.read_excel("precios.xlsx")
 test_metrics = pd.read_excel("Métricas/Test_metrics.xlsx")
-predicciones = pd.read_excel("Métricas/Predicciones.xlsx", sheet_name="Hoja para copiar las tablas")
+predicciones = pd.read_excel("Métricas/Predicciones.xlsx")
 attention = pd.read_excel("Métricas/Atención.xlsx")
 
 
