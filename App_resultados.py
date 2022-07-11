@@ -318,7 +318,7 @@ elif modo == "Predicciones por horas":
                             df_metricas_horas,
                             hora_seleccionada):
 
-        fig2 = make_subplots(rows=2, cols=1, shared_xaxes=False,
+        fig2 = make_subplots(rows=2, cols=1, shared_xaxes=True,
                             vertical_spacing=0.12,
                             subplot_titles=("Predicción para todos los días a la hora " + str(hora_seleccionada),
                                             ("MAPE " if metrica_elegica else "MAE ") + "para todos los días "),
@@ -346,7 +346,7 @@ elif modo == "Predicciones por horas":
             row=1, col=1)
 
         fig2.update_xaxes(tickmode="array", tickvals=df_datos["datetime"],
-                          row=1, col=1)
+                          row=1, col=1, showticklabels=True)
 
         fig2.update_layout(
             title=dict(x=0.5),
@@ -367,7 +367,7 @@ elif modo == "Predicciones por horas":
                       row=2, col=1)
 
         fig2.update_xaxes(tickmode="array", tickvals=df_datos["datetime"],
-                          row=2, col=1)
+                          row=2, col=1, showticklabels=True)
 
         fig2.update_layout(width=1000, height=650,
                            margin=dict(t=20))
@@ -439,7 +439,7 @@ else:
 
 
     def plot_horas_por_dia(df_predicciones, df_test_metrics, df_metricas_horas):
-        fig3 = make_subplots(rows=2, cols=1, shared_xaxes=False,
+        fig3 = make_subplots(rows=2, cols=1, shared_xaxes=True,
                              vertical_spacing=0.15,
                              subplot_titles=("Predicción para todos las horas del día " + str(fecha_elegida),
                                              ("MAPE " if metrica_elegica else "MAE ") + "para todas las horas "),
@@ -469,7 +469,7 @@ else:
             row=1, col=1)
 
         fig3.update_xaxes(tickmode="array", tickvals=df_predicciones["Hora"],
-                          row=1, col=1)
+                          row=1, col=1, showticklabels=True)
         
         fig3.update_layout(height=650,
                            margin=dict(t=20))
@@ -481,6 +481,9 @@ else:
                               xaxis="x",
                               showlegend=False),
                        row=2, col=1)
+        
+        fig3.update_xaxes(tickmode="array", tickvals=df_predicciones["Hora"],
+                          row=2, col=1)
 
         fig3.update_layout(
             title=dict(x=0.5),
