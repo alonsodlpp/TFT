@@ -41,9 +41,9 @@ st.markdown(
 )
 
 datos = pd.read_excel("precios.xlsx")
-test_metrics = pd.read_excel("Métricas/Test_metrics.xlsx")
-predicciones = pd.read_excel("Métricas/Predicciones.xlsx")
-attention = pd.read_excel("Métricas/Atención.xlsx")
+test_metrics = pd.read_excel("Test_metrics.xlsx")
+predicciones = pd.read_excel("Predicciones.xlsx")
+attention = pd.read_excel("Atención.xlsx")
 
 
 def filtrar_fecha_encoder(df,
@@ -302,7 +302,7 @@ elif modo == "Predicciones por horas":
 
     datos = datos[(datos["datetime"].isin(predicciones["datetime"])) & (datos["Hora"]==int(hora_elegida))]
 
-    metricas_horas = pd.read_excel("Métricas/Métricas_por_horas.xlsx")
+    metricas_horas = pd.read_excel("Métricas_por_horas.xlsx")
     metricas_horas = filtrar_fecha_encoder(df=metricas_horas,
                                            encoder=encoder_elegido,
                                            fecha=fecha_elegida,
@@ -422,7 +422,7 @@ else:
                                   help="Si la casilla está activada, se muestra el MAPE, al contrario, se muestra el MAE",
                                   value=True)
 
-    metricas_horas = pd.read_excel("Métricas/Métricas por días.xlsx")
+    metricas_horas = pd.read_excel("Métricas por días.xlsx")
     metricas_horas = filtrar_fecha_encoder(df=metricas_horas,
                                            encoder=encoder_elegido,
                                            fecha=fecha_elegida,
