@@ -41,9 +41,9 @@ st.markdown(
 )
 
 datos = pd.read_excel("precios.xlsx")
-test_metrics = pd.read_excel("Test_metrics.xlsx")
-predicciones = pd.read_excel("Predicciones.xlsx")
-attention = pd.read_excel("Atención.xlsx")
+test_metrics = pd.read_excel("Métricas/Test_metrics.xlsx")
+predicciones = pd.read_excel("Métricas/Predicciones.xlsx", sheet_name="Hoja para copiar las tablas")
+attention = pd.read_excel("Métricas/Atención.xlsx")
 
 
 def filtrar_fecha_encoder(df,
@@ -112,7 +112,7 @@ def plot_prediction_plotly_diff(data,
 
     fig.add_trace(go.Scatter(
         x=data[data["Hora"] == hora_seleccionada]["datetime"][-1:],
-        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil_98"],
+        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil 98"],
         hovertemplate=
         '<i>Percentil 98</i>: %{y:.4f}€',
         line_color="black",
@@ -124,7 +124,7 @@ def plot_prediction_plotly_diff(data,
 
     fig.add_trace(go.Scatter(
         x=data[data["Hora"] == hora_seleccionada]["datetime"][-1:],
-        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil_90"],
+        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil 90"],
         hovertemplate=
         '<i>Percentil 90</i>: %{y:.4f}€',
         line_color="red",
@@ -137,7 +137,7 @@ def plot_prediction_plotly_diff(data,
 
     fig.add_trace(go.Scatter(
         x=data[data["Hora"] == hora_seleccionada]["datetime"][-1:],
-        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil_75"],
+        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil 75"],
         hovertemplate=
         '<i>Percentil 75</i>: %{y:.4f}€',
         line_color="darkorange",
@@ -150,7 +150,7 @@ def plot_prediction_plotly_diff(data,
 
     fig.add_trace(go.Scatter(
         x=data[data["Hora"] == hora_seleccionada]["datetime"][-1:],
-        y=df_predicciones[df_predicciones["Hora"] == hora_seleccionada]["Percentil_50"],
+        y=df_predicciones[df_predicciones["Hora"] == hora_seleccionada]["Percentil 50"],
         hovertemplate=
         '<i>Predicción</i>: %{y:.4f}€',
         line_color="mediumspringgreen",
@@ -161,7 +161,7 @@ def plot_prediction_plotly_diff(data,
 
     fig.add_trace(go.Scatter(
         x=data[data["Hora"] == hora_seleccionada]["datetime"][-1:],
-        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil_25"],
+        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil 25"],
         hovertemplate=
         '<i>Percentil 25</i>: %{y:.4f}€',
         line_color="darkorange",
@@ -173,7 +173,7 @@ def plot_prediction_plotly_diff(data,
 
     fig.add_trace(go.Scatter(
         x=data[data["Hora"] == hora_seleccionada]["datetime"][-1:],
-        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil_10"],
+        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil 10"],
         hovertemplate=
         '<i>Percentil 10</i>: %{y:.4f}€',
         #fill='tonexty',
@@ -186,7 +186,7 @@ def plot_prediction_plotly_diff(data,
 
     fig.add_trace(go.Scatter(
         x=data[data["Hora"] == hora_seleccionada]["datetime"][-1:],
-        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil_2"],
+        y=df_predicciones[df_predicciones["Hora"]==hora_seleccionada]["Percentil 2"],
         hovertemplate=
         '<i>Percentil 2</i>: %{y:.4f}€',
         #fill='tonexty',
@@ -237,11 +237,11 @@ def plot_prediction_plotly_diff(data,
 
 
 modo = st.sidebar.radio(label="Elija el modo de visualización",
-                        options=['Predicciones por días', 'Predicciones por horas'],
+                        options=['Predicciones día a día', 'Predicciones por horas', "Predicciones por días"],
                         help="Podrá visualizar, por un lado, las predicciones de todas las horas para cada día. "
                              "Por otro, podrá visualizar las predicciones de todos los días para cada hora.")
 
-if modo == "Predicciones por días":
+if modo == "Predicciones día a día":
 
     c1, c2 = st.columns((1, 1))
 
@@ -260,7 +260,6 @@ if modo == "Predicciones por días":
 
     datos = datos[datos["datetime"]<=fecha_elegida]
 
-    print(attention)
     metrica_elegica = st.checkbox(label="MAPE / MAE", help="Si la casilla está activada, se muestra el MAPE, al contrario, se muestra el MAE", value=True)
     hora_elegida = st.select_slider(label="Seleccione una hora", options=np.arange(0,24))
 
@@ -284,7 +283,7 @@ if modo == "Predicciones por días":
                                                 df_attention=attention,
                                                 prediction_length=1), use_container_width=True)
 
-else:
+elif modo == "Predicciones por horas":
     c1, c2 = st.columns((0.1, 1))
     with c1:
         encoder_elegido = st.radio('Seleccione la longitud del encoder:',
@@ -303,7 +302,7 @@ else:
 
     datos = datos[(datos["datetime"].isin(predicciones["datetime"])) & (datos["Hora"]==int(hora_elegida))]
 
-    metricas_horas = pd.read_excel("Métricas_por_horas.xlsx")
+    metricas_horas = pd.read_excel("Métricas/Métricas_por_horas.xlsx")
     metricas_horas = filtrar_fecha_encoder(df=metricas_horas,
                                            encoder=encoder_elegido,
                                            fecha=fecha_elegida,
@@ -328,7 +327,7 @@ else:
 
         fig2.add_trace(go.Scatter(
             x=df_datos["datetime"],
-            y=df_predicciones["Percentil_50"],
+            y=df_predicciones["Percentil 50"],
             hovertemplate=
             '<i>Predicciones</i>: %{y:.4f}€',
             line_color="green",
@@ -348,7 +347,6 @@ else:
 
         fig2.update_xaxes(tickmode="array", tickvals=df_datos["datetime"],
                           row=1, col=1)
-
 
         fig2.update_layout(
             title=dict(x=0.5),
@@ -404,3 +402,115 @@ else:
 
     st.plotly_chart(grafico, use_container_width=True)
     st.plotly_chart(metricas, use_container_width=True)
+
+
+else:
+    c1, c2 = st.columns((0.2, 1))
+    with c1:
+        encoder_elegido = st.radio('Seleccione la longitud del encoder:',
+                                   ("4", "7"))
+    with c2:
+        fecha_elegida = st.selectbox('Seleccione una de las siguientes fechas:',
+                                     ('15-01-2022', '31-01-2022',
+                                      '15-02-2022', '28-02-2022',
+                                      '15-03-2022', '31-03-2022',
+                                      '15-04-2022', '30-04-2022',
+                                      '15-05-2022', '31-05-2022',
+                                      '15-06-2022'))
+
+    metrica_elegica = st.checkbox(label="MAPE / MAE",
+                                  help="Si la casilla está activada, se muestra el MAPE, al contrario, se muestra el MAE",
+                                  value=True)
+
+    metricas_horas = pd.read_excel("Métricas/Métricas por días.xlsx")
+    metricas_horas = filtrar_fecha_encoder(df=metricas_horas,
+                                           encoder=encoder_elegido,
+                                           fecha=fecha_elegida,
+                                           hora=None)
+
+    predicciones = filtrar_fecha_encoder(df=predicciones,
+                                         encoder=encoder_elegido,
+                                         fecha=fecha_elegida,
+                                         hora=None)
+    test_metrics = filtrar_fecha_encoder(df=test_metrics,
+                                         encoder=encoder_elegido,
+                                         fecha=fecha_elegida,
+                                         hora=None)
+
+
+    def plot_horas_por_dia(df_predicciones, df_test_metrics, df_metricas_horas):
+        fig3 = make_subplots(rows=2, cols=1, shared_xaxes=False,
+                             vertical_spacing=0.15,
+                             subplot_titles=("Predicción para todos las horas del día " + str(fecha_elegida),
+                                             ("MAPE " if metrica_elegica else "MAE ") + "para todas las horas "),
+                             x_title="Hora",
+                             row_width=[0.25, 0.75])
+
+        fig3.add_trace(go.Scatter(
+            x=df_predicciones["Hora"],
+            y=df_predicciones["Percentil 50"],
+            hovertemplate=
+            '<i>Predicciones</i>: %{y:.4f}€',
+            line_color="green",
+            mode="lines+markers",
+            showlegend=True,
+            name='Predicciones'),
+            row=1, col=1)
+
+        fig3.add_trace(go.Scatter(
+            x=df_predicciones["Hora"],
+            y=df_predicciones["Precio real"],
+            hovertemplate=
+            '<i>Precio</i>: %{y:.4f}€',
+            line_color="blue",
+            mode="lines+markers",
+            showlegend=True,
+            name='Precio'),
+            row=1, col=1)
+
+        fig3.update_xaxes(tickmode="array", tickvals=df_predicciones["Hora"],
+                          row=1, col=1)
+
+        fig3.add_trace(go.Bar(y=df_test_metrics[("mape" if metrica_elegica else "mae")],
+                              name=("MAPE" if metrica_elegica else "MAE"),
+                              hovertemplate=
+                              ('<i> MAPE </i>: %{y:.2f}%' if metrica_elegica else '<i> MAE </i>: %{y:.2f}'),
+                              xaxis="x",
+                              showlegend=False),
+                       row=2, col=1)
+
+        fig3.update_layout(
+            title=dict(x=0.5),
+            yaxis_title="Predcio (€)",
+            xaxis_title="Hora",
+            height=650)
+
+        df_metricas_horas.drop(["Encoder", "datetime", "median_ape", "Weighted MAPE"], axis=1, inplace=True)
+        df_metricas_horas.set_index("Métricas", inplace=True)
+        df_metricas_horas = df_metricas_horas.round(4)
+
+        fig_tabla = go.Figure(data=[go.Table(
+            header=dict(values=list(df_metricas_horas.columns),
+                        fill_color='paleturquoise',
+                        align='center',
+                        font=dict(size=17)),
+            cells=dict(values=[df_metricas_horas["MAE"], df_metricas_horas["Weighted MAE"],
+                               df_metricas_horas["Opposite Weighted MAE"], df_metricas_horas["MAPE"]],
+                       fill_color='lavender',
+                       align='center',
+                       font=dict(size=17)))
+        ])
+
+        fig_tabla.update_layout(
+            title_text="Métricas para el día " + str(fecha_elegida),
+            title=dict(x=0.5),
+            yaxis_title="Predcio (€)",
+            xaxis_title="Fecha",
+            height=550)
+
+        return fig3, fig_tabla
+
+    grafico, graf_met_horas = plot_horas_por_dia(predicciones, test_metrics, metricas_horas)
+
+    st.plotly_chart(grafico, use_container_width=True)
+    st.plotly_chart(graf_met_horas, use_container_width=True)
