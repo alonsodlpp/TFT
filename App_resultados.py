@@ -255,7 +255,7 @@ def plot_horas_metricas(df_predicciones,
     fig2 = make_subplots(rows=2, cols=1, shared_xaxes=True,
                         vertical_spacing=0.12,
                         subplot_titles=("Predicción para " + frase + str(texto_hora_dia),
-                                        ("MAPE " if metrica_elegica else "MAE ") + "para todos los días "),
+                                        ("MAPE " if metrica_elegica else "MAE ") + "para " + frase[:15]),
                         x_title=eje_x,
                         row_width=[0.25, 0.75])
 
