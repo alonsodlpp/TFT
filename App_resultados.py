@@ -231,6 +231,8 @@ def plot_prediction_plotly_diff(data,
     fig.update_layout(width=1000, height=650,
                       margin=dict(t=20))
     fig.update_xaxes(dtick=1, row=2, col=1)
+        
+    fig.update_yaxes(title_text="Atención", secondary_y=True)
 
     return fig
 
