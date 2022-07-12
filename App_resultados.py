@@ -302,7 +302,7 @@ def plot_horas_metricas(df_predicciones,
                          showlegend=False),
                   row=2, col=1)
         
-    fig['layout']['yaxis2']['title'] = ("MAPE" if metrica_elegica else "MAE")
+    fig2['layout']['yaxis2']['title'] = ("MAPE" if metrica_elegica else "MAE")
 
     fig2.update_xaxes(tickmode="array", tickvals=df_predicciones[col_filtrada],
                       row=2, col=1)
