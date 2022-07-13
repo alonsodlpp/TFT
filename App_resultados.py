@@ -380,13 +380,16 @@ if modo == "Predicciones día a día":
                                       fecha=fecha_elegida,
                                       hora=hora_elegida)
 
-    st.plotly_chart(plot_prediction_plotly_diff(data=datos,
-                                                hora_seleccionada=hora_elegida,
-                                                df_predicciones=predicciones,
-                                                df_test_metrics=test_metrics,
-                                                df_attention=attention,
-                                                prediction_length=1), use_container_width=True)
+    grafico_pred = plot_prediction_plotly_diff(data=datos,
+                                               hora_seleccionada=hora_elegida,
+                                               df_predicciones=predicciones,
+                                               df_test_metrics=test_metrics,
+                                               df_attention=attention,
+                                               prediction_length=1)
 
+    st.plotly_chart(grafico_pred, use_container_width=True)
+
+        
 elif modo == "Predicciones por horas":
     c1, c2 = st.columns((0.1, 1))
     with c1:
