@@ -46,6 +46,7 @@ predicciones = pd.read_excel("Predicciones.xlsx")
 attention = pd.read_excel("Atención.xlsx")
 
 
+@st.cache(suppress_st_warning=True, show_spinner=False)
 def filtrar_fecha_encoder(df,
                           encoder,
                           fecha=None,
@@ -80,6 +81,8 @@ def filtrar_fecha_encoder(df,
 
     return df
 
+
+@st.cache(suppress_st_warning=True, show_spinner=False)
 def plot_prediction_plotly_diff(data,
                                 hora_seleccionada,
                                 df_predicciones,
@@ -118,7 +121,7 @@ def plot_prediction_plotly_diff(data,
         line_color="black",
         mode=("lines" if prediction_length > 1 else None),
         showlegend=True,
-        name='Percentil: 0.98'),
+        name='Percentil 98'),
         row=1, col=1,
         secondary_y=False)
 
@@ -131,7 +134,7 @@ def plot_prediction_plotly_diff(data,
         mode=("lines" if prediction_length > 1 else None),
         # line_color='rgba(255,255,255,0)',
         showlegend=True,
-        name='Percentil: 0.9'),
+        name='Percentil 90'),
         row=1, col=1,
         secondary_y=False)
 
@@ -144,7 +147,7 @@ def plot_prediction_plotly_diff(data,
         mode=("lines" if prediction_length > 1 else None),
         # line_color='rgba(255,255,255,0)',
         showlegend=True,
-        name='Percentil: 0.75'),
+        name='Percentil 75'),
         row=1, col=1,
         secondary_y=False)
 
@@ -167,7 +170,7 @@ def plot_prediction_plotly_diff(data,
         line_color="darkorange",
         mode=("lines" if prediction_length > 1 else None),
         showlegend=True,
-        name='Percentil: 0.25'),
+        name='Percentil 25'),
         row=1, col=1,
         secondary_y=False)
 
@@ -180,7 +183,7 @@ def plot_prediction_plotly_diff(data,
         line_color="red",
         mode=("lines" if prediction_length > 1 else None),
         showlegend=True,
-        name='Percentil: 0.1'),
+        name='Percentil 10'),
         row=1, col=1,
         secondary_y=False)
 
@@ -193,7 +196,7 @@ def plot_prediction_plotly_diff(data,
         line_color="black",
         mode=("lines" if prediction_length > 1 else None),
         showlegend=True,
-        name='Percentil: 0.02'),
+        name='Percentil 2'),
         row=1, col=1,
         secondary_y=False)
 
@@ -239,6 +242,7 @@ def plot_prediction_plotly_diff(data,
     return fig
 
 
+@st.cache(suppress_st_warning=True, show_spinner=False)
 def plot_horas_metricas(df_predicciones,
                         df_test_metrics,
                         df_metricas_horas,
