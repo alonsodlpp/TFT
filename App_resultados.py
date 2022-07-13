@@ -82,7 +82,7 @@ def filtrar_fecha_encoder(df,
     return df
 
 
-@st.cache(suppress_st_warning=True, show_spinner=False)
+
 def plot_prediction_plotly_diff(data,
                                 hora_seleccionada,
                                 df_predicciones,
