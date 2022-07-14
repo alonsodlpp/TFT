@@ -360,7 +360,7 @@ if modo == "Predicciones día a día":
 
     with c2:
         encoder_elegido = st.selectbox('Seleccione la longitud del encoder:',
-                                       ("4", "7"))
+                                       ("4", "7"), value="7")
 
     datos = datos[datos["datetime"]<=fecha_elegida]
 
