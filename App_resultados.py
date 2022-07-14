@@ -360,7 +360,7 @@ if modo == "Predicciones día a día":
 
     with c2:
         encoder_elegido = st.selectbox('Seleccione la longitud del encoder:',
-                                       ("4", "7"), value="7")
+                                       ("4", "7"), index=1)
 
     datos = datos[datos["datetime"]<=fecha_elegida]
 
@@ -394,7 +394,7 @@ elif modo == "Predicciones por horas":
     c1, c2 = st.columns((0.1, 1))
     with c1:
         encoder_elegido = st.radio('Seleccione la longitud del encoder:',
-                                  ("4", "7"))
+                                  ("4", "7"), index=1)
     with c2:
         hora_elegida = st.select_slider(label="Seleccione una hora", options=np.arange(0, 24))
 
@@ -434,7 +434,7 @@ else:
     c1, c2 = st.columns((0.2, 1))
     with c1:
         encoder_elegido = st.radio('Seleccione la longitud del encoder:',
-                                   ("4", "7"))
+                                   ("4", "7"), index=1)
     with c2:
         fecha_elegida = st.selectbox('Seleccione una de las siguientes fechas:',
                                      ('15-01-2022', '31-01-2022',
