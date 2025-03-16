@@ -26,19 +26,7 @@ st.markdown("""
 st.markdown("<h4 style='text-align: center;'>A continuación podrá visualizar los resultados obtenidos "
             "con el modelo de Transformers de Fusión Temporal</h4>", unsafe_allow_html=True)
 
-st.markdown(
-    """
-    <style>
-    [data-testid="stSidebar"][aria-expanded="true"] > div:first-child{
-        width: 230px;
-    }
-    [data-testid="stSidebar"][aria-expanded="false"] > div:first-child{
-        width: 175px;
-        margin-left: -400px;
-    }
-    """,
-    unsafe_allow_html=True,
-)
+
 
 datos = pd.read_excel("precios.xlsx")
 test_metrics = pd.read_excel("Test_metrics.xlsx")
