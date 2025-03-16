@@ -96,8 +96,8 @@ def plot_prediction_plotly_diff(data,
                         specs=[[{"secondary_y": True}],
                                [{"secondary_y": False}]],
                         vertical_spacing=0.1,
-                        subplot_titles=("Predicción para la hora " + str(hora_seleccionada),
-                                        ("MAPE " if metrica_elegica else "MAE ") + "para todas las horas "),
+                        #subplot_titles=("Predicción para la hora " + str(hora_seleccionada),
+                        #                ("MAPE " if metrica_elegica else "MAE ") + "para todas las horas "),
                         x_title="Hora",
                         row_width=[0.25, 0.75])
 
@@ -230,7 +230,7 @@ def plot_prediction_plotly_diff(data,
                              xaxis="x"),
                     row=2, col=1)
         
-    #fig['layout']['yaxis3']['title'] = ("MAPE" if metrica_elegica else "MAE")
+    fig['layout']['yaxis3']['title'] = ("MAPE" if metrica_elegica else "MAE")
 
     fig.update_layout(width=1000, height=650,
                       margin=dict(t=20))
