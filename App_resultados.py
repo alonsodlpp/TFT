@@ -46,7 +46,6 @@ predicciones = pd.read_excel("Predicciones.xlsx")
 attention = pd.read_excel("Atención.xlsx")
 
 
-@st.cache(suppress_st_warning=True, show_spinner=False)
 def filtrar_fecha_encoder(df,
                           encoder,
                           fecha=None,
@@ -242,7 +241,6 @@ def plot_prediction_plotly_diff(data,
     return fig
 
 
-@st.cache(suppress_st_warning=True, show_spinner=False)
 def plot_horas_metricas(df_predicciones,
                         df_test_metrics,
                         df_metricas_horas,
