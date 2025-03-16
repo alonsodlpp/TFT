@@ -26,7 +26,19 @@ st.markdown("""
 st.markdown("<h4 style='text-align: center;'>A continuación podrá visualizar los resultados obtenidos "
             "con el modelo de Transformers de Fusión Temporal</h4>", unsafe_allow_html=True)
 
-
+st.markdown(
+    """
+    <style>
+    [data-testid="stSidebar"][aria-expanded="true"] > div:first-child{
+        width: 230px;
+    }
+    [data-testid="stSidebar"][aria-expanded="false"] > div:first-child{
+        width: 175px;
+        margin-left: -400px;
+    }
+    """,
+    unsafe_allow_html=True,
+)
 
 datos = pd.read_excel("precios.xlsx")
 test_metrics = pd.read_excel("Test_metrics.xlsx")
@@ -97,7 +109,7 @@ def plot_prediction_plotly_diff(data,
         line_color='blue',
         showlegend=True,
         name='Precio real'),
-        row=1, col=1,
+        row=2, col=1,
         secondary_y=False)
 
     fig.add_trace(go.Scatter(
@@ -109,7 +121,7 @@ def plot_prediction_plotly_diff(data,
         mode=("lines" if prediction_length > 1 else None),
         showlegend=True,
         name='Percentil 98'),
-        row=1, col=1,
+        row=2, col=1,
         secondary_y=False)
 
     fig.add_trace(go.Scatter(
@@ -122,7 +134,7 @@ def plot_prediction_plotly_diff(data,
         # line_color='rgba(255,255,255,0)',
         showlegend=True,
         name='Percentil 90'),
-        row=1, col=1,
+        row=2, col=1,
         secondary_y=False)
 
     fig.add_trace(go.Scatter(
@@ -135,7 +147,7 @@ def plot_prediction_plotly_diff(data,
         # line_color='rgba(255,255,255,0)',
         showlegend=True,
         name='Percentil 75'),
-        row=1, col=1,
+        row=2, col=1,
         secondary_y=False)
 
     fig.add_trace(go.Scatter(
@@ -146,7 +158,7 @@ def plot_prediction_plotly_diff(data,
         line_color="mediumspringgreen",
         showlegend=True,
         name='Predicción'),
-        row=1, col=1,
+        row=2, col=1,
         secondary_y=False)
 
     fig.add_trace(go.Scatter(
@@ -158,7 +170,7 @@ def plot_prediction_plotly_diff(data,
         mode=("lines" if prediction_length > 1 else None),
         showlegend=True,
         name='Percentil 25'),
-        row=1, col=1,
+        row=2, col=1,
         secondary_y=False)
 
     fig.add_trace(go.Scatter(
@@ -171,7 +183,7 @@ def plot_prediction_plotly_diff(data,
         mode=("lines" if prediction_length > 1 else None),
         showlegend=True,
         name='Percentil 10'),
-        row=1, col=1,
+        row=2, col=1,
         secondary_y=False)
 
     fig.add_trace(go.Scatter(
@@ -184,7 +196,7 @@ def plot_prediction_plotly_diff(data,
         mode=("lines" if prediction_length > 1 else None),
         showlegend=True,
         name='Percentil 2'),
-        row=1, col=1,
+        row=2, col=1,
         secondary_y=False)
 
     fig.add_trace(
@@ -196,7 +208,7 @@ def plot_prediction_plotly_diff(data,
                    name="Atención"),
 
         secondary_y=True,
-        row=1, col=1
+        row=2, col=1
     )
 
     fig.update_layout(title=dict(x=0.5),
@@ -216,7 +228,7 @@ def plot_prediction_plotly_diff(data,
                              ('MAPE: %{y:.2f}%' if metrica_elegica else 'MAE: %{y:.2f}'),
                              showlegend=False,
                              xaxis="x"),
-                    row=2, col=1)
+                    row=1, col=1)
         
     fig['layout']['yaxis3']['title'] = ("MAPE" if metrica_elegica else "MAE")
 
