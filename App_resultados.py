@@ -98,9 +98,8 @@ def plot_prediction_plotly_diff(data,
                         vertical_spacing=0.1,
                         subplot_titles=("Predicción para la hora " + str(hora_seleccionada),
                                         ("MAPE " if metrica_elegica else "MAE ") + "para todas las horas "),
-                        #x_title="Hora",
+                        x_title="Hora",
                         row_width=[0.25, 0.75])
-    fig.update_xaxes(title_text="Hora")
 
     fig.add_trace(go.Scatter(
         x=data[data["Hora"] == hora_seleccionada].reset_index().iloc[-df_attention.shape[0]-2:]["datetime"],
@@ -231,7 +230,7 @@ def plot_prediction_plotly_diff(data,
                              xaxis="x"),
                     row=2, col=1)
         
-    fig['layout']['yaxis3']['title'] = ("MAPE" if metrica_elegica else "MAE")
+    #fig['layout']['yaxis3']['title'] = ("MAPE" if metrica_elegica else "MAE")
 
     fig.update_layout(width=1000, height=650,
                       margin=dict(t=20))
